@@ -49,6 +49,8 @@ func kill(pod string, namespace string) {
 	err = clientset.CoreV1().Pods(namespace).Delete(context.TODO(), pod, metav1.DeleteOptions{})
 	if err != nil {
 		log.Println("[WARN] can't kill pod ", pod, err)
+	} else {
+		log.Println("[INFO] pod deleted: ", pod)
 	}
 }
 
