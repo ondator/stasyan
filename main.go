@@ -56,6 +56,7 @@ func kill(pod string, namespace string) {
 }
 
 func chooseTarget(pods []string) string {
+	log.Println(pods)
 	if len(pods) == 1 {
 		return pods[0]
 	}

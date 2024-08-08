@@ -20,9 +20,9 @@ spec:
     - name: STASYAN_LIFETIME
       value: "10"
     - name: MY_POD_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
+      valueFrom:
+        fieldRef:
+            fieldPath: metadata.name
 EOF
 ```
 
