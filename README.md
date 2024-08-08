@@ -4,7 +4,27 @@ Stasyan is very simple chaos enginering tool. By default it just every 5 min del
 
 ## Usage
 
-//TODO
+I simply do smth like 
+
+```shell
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stasyan      
+spec:
+  containers:
+  - name: stasyan
+    image: ondator/stasyan
+    env: 
+    - name: STASYAN_LIFETIME
+      value: "10"
+    - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+EOF
+```
 
 ## Configuration
 
