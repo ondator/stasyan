@@ -79,9 +79,13 @@ func getPods(namespace string, me string) []string {
 		return []string{}
 	}
 
-	pods := Filter(Map(podList.Items, func(p v1.Pod) string {
+	allpods := Map(podList.Items, func(p v1.Pod) string {
 		return p.Name
-	}), func(p string) bool { return p != me })
+	})
+
+	log.Println(allpods)
+
+	pods := Filter(allpods, func(p string) bool { return p != me })
 
 	return pods
 }
