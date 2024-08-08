@@ -7,12 +7,32 @@ Stasyan is very simple chaos enginering tool. By default it just every 5 min del
 I simply do smth like 
 
 ```shell
+kubectl create serviceaccount stasyan
+
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: default
+  name: stasyan
+rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources: ["pods"]
+  verbs: ["get", "watch", "list", "delete"]
+EOF
+
+kubectl create clusterrolebinding stasyan \
+  --clusterrole=stasyan  \
+  --serviceaccount=default:stasyan
+
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Pod
 metadata:
   name: stasyan      
 spec:
+  serviceAccountName: stasyan
   containers:
   - name: stasyan
     image: ondator/stasyan
