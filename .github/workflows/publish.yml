@@ -9,28 +9,22 @@ on:
       - 'v*'
 permissions:
   contents: write
-  
+
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Set up Go
-      uses: actions/setup-go@v4
-      with:
-        go-version: '1.22'
-
-    - name: Build
-      run: go build -o target/ -v ./...
-
-    - name: Test
-      run: go test -v ./...
-
-  publish:
-      needs: build
+  publish:      
       runs-on: ubuntu-latest
       steps:
+      - uses: actions/checkout@v4
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.22'
+
+      - name: Build
+        run: go build -o target/ -v ./...
+
+      - name: Test
+        run: go test -v ./...
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
