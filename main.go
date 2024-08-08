@@ -76,6 +76,7 @@ func getPods(namespace string, me string) []string {
 
 	podList, err := clientset.CoreV1().Pods(namespace).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
+		log.Println("error while obtain podlist: ", err)
 		return []string{}
 	}
 
